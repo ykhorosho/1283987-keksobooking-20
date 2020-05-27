@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Яна Хорошилова](https://up.htmlacademy.ru/javascript/20/user/1283987).
-* Наставник: `Неизвестно`.
+* Наставник: [Артем Доба](https://htmlacademy.ru/profile/id618431).
 
 ---
 
