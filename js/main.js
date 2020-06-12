@@ -103,3 +103,33 @@ var appendOfferElements = function (createOfferElementFunction, offers, mapPinsE
 };
 
 appendOfferElements(createOfferElement, createdOffers, mapPinsBlock, mapPin);
+
+
+// Второе задание
+var mapCard = document.querySelector('#card');
+
+var createCard = function (offerObject) {
+  var cardCopy = mapCard.content.cloneNode(true);
+
+  var title = cardCopy.querySelector('.popup__title');
+  var address = cardCopy.querySelector('.popup__text--address');
+  var price = cardCopy.querySelector('.popup__text--price');
+  var type = cardCopy.querySelector('.popup__type');
+  var capacity = cardCopy.querySelector('.popup__text--capacity');
+  var time = cardCopy.querySelector('.popup__text--time');
+  var featuresList = cardCopy.querySelector('.popup__features');
+  var description = cardCopy.querySelector('.popup__description');
+  var photos = cardCopy.querySelector('.popup__photos');
+  var avatar = cardCopy.querySelector('.popup__avatar');
+
+  title.textContent = offerObject.offer.title;
+  address.textContent = offerObject.offer.address;
+  price.textContent = offerObject.offer.price + '₽/ночь';
+  type.textContent = offerObject.offer.type;
+  capacity.textContent = offerObject.offer.rooms + ' комнаты для ' + offerObject.offer.guests + ' гостей';
+  time.textContent = 'Заезд после ' + offerObject.offer.checkin + ', выезд до ' + offerObject.offer.checkout;
+  description.textContent = offerObject.offer.description;
+  avatar.src = offerObject.author.avatar;
+
+  return cardCopy;
+};
