@@ -104,7 +104,6 @@ var appendOfferElements = function (createOfferElementFunction, offers, mapPinsE
 
 appendOfferElements(createOfferElement, createdOffers, mapPinsBlock, mapPin);
 
-
 // Второе задание
 var mapCard = document.querySelector('#card');
 
