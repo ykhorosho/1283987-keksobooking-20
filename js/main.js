@@ -103,3 +103,59 @@ var appendOfferElements = function (createOfferElementFunction, offers, mapPinsE
 };
 
 appendOfferElements(createOfferElement, createdOffers, mapPinsBlock, mapPin);
+
+// card
+var card = document.querySelector('#card');
+var mapCard = document.querySelector('.map__card');
+
+var typeToHouse = {
+  flat: 'Квартира',
+  bungalo: 'Бунгало',
+  house: 'Дом',
+  palace: 'Дворец'
+};
+
+/* Возвращает список фото жилья*/
+var getFillPhoto = function (photoObject, block) {
+  var photoFragment = document.createDocumentFragment();
+
+  for (var i = 0; i < photoObject.length; i++) {
+    var photoImg = document.createElement('img');
+    photoImg.src = photoObject[i];
+    photoImg.width = 45;
+    photoImg.alt = 'Фотография жилья';
+    photoImg.classList.add('popup__photo');
+
+    photoFragment.appendChild(photoImg);
+  }
+
+  block.appendChild(fragment);
+};
+
+var getFillCard = function (objectCount) {
+  var cardCopy = mapCard.cloneNode(true);
+
+  var title = cardCopy.querySelector('.popup__title');
+  var address = cardCopy.querySelector('.popup__text--address');
+  var price = cardCopy.querySelector('.popup__text--price');
+  var type = cardCopy.querySelector('.popup__type');
+  var capacity = cardCopy.querySelector('.popup__text--capacity');
+  var time = cardCopy.querySelector('.popup__text--time');
+  var featuresList = cardCopy.querySelector('.popup__features');
+  var description = cardCopy.querySelector('.popup__description');
+  var photos = cardCopy.querySelector('.popup__photos');
+  var avatar = cardCopy.querySelector('.popup__avatar');
+
+  title.textContent = objectCount.offer.title;
+  address.textContent = objectCount.offer.address;
+  price.textContent = objectCount.offer.price + '₽/ночь';
+  type.textContent = typeToHouse[objectCount.offer.type];
+  capacity.textContent = objectCount.offer.rooms + ' комнаты для ' + objectCount.offer.guests + ' гостей';
+  time.textContent = 'Заезд после ' + objectCount.offer.checkin + ', выезд до ' + objectCount.offer.checkout;
+  featuresList.src = objectCount.offer.features;
+  description.textContent = objectCount.offer.description;
+  getFillPhoto.src = objectCount.offer.photos;
+  avatar.src = objectCount.author.avatar;
+
+  return cardCopy;
+};
