@@ -20,6 +20,9 @@ var offersDescription = ['Большая комната', 'Маленькая к
 var OFFSET_X = 25;
 var OFFSET_Y = 70;
 
+var mapPinsBlock = document.querySelector('.map__pins');
+var mapPinsWidth = mapPinsBlock.offsetWidth;
+
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
@@ -58,11 +61,12 @@ var createOffer = function (objectCount) {
       'photos': photosArray
     },
     'location': {
-      'x': getRandomIntInclusive(50, 930),
+      'x': getRandomIntInclusive(0 + OFFSET_X, mapPinsWidth - OFFSET_X),
       'y': getRandomIntInclusive(130, 630)
     }
   };
 };
+
 
 var createOffers = function () {
   var offers = [];
@@ -76,8 +80,6 @@ var createdOffers = createOffers();
 
 var map = document.querySelector('.map');
 map.classList.remove('map--faded');
-
-var mapPinsBlock = document.querySelector('.map__pins');
 
 var mapPin = document.querySelector('#pin');
 
@@ -103,3 +105,61 @@ var appendOfferElements = function (createOfferElementFunction, offers, mapPinsE
 };
 
 appendOfferElements(createOfferElement, createdOffers, mapPinsBlock, mapPin);
+
+var mapCard = document.querySelector('#card');
+
+var featuresListElement = function (featuresArray, featuresList) {
+  var elements = featuresList.querySelectorAll('li');
+  for (var i = 0; i < featuresArray.length; i++) {
+    elements[i].textContent = featuresArray[i];
+
+  }
+};
+
+var photosCopy = function (photosArray, photosBlock) {
+  var photoElemnet = photosBlock.querySelector('img');
+  if (photosArray.length === 1) {
+    photoElemnet.src = photosArray[0];
+  } else {
+    var photoElementCopy;
+    for (var i = 0; i < photosArray.length - 1; i++) {
+      photoElementCopy = photoElemnet.cloneNode(true);
+      photoElementCopy.src = photosArray[i];
+      photosBlock.appendChild(photoElementCopy);
+    }
+    photoElemnet.src = photosArray[photosArray.length - 1];
+  }
+};
+
+var createCard = function (offerObject) {
+  var cardCopy = mapCard.content.cloneNode(true);
+
+  var title = cardCopy.querySelector('.popup__title');
+  var address = cardCopy.querySelector('.popup__text--address');
+  var price = cardCopy.querySelector('.popup__text--price');
+  var type = cardCopy.querySelector('.popup__type');
+  var capacity = cardCopy.querySelector('.popup__text--capacity');
+  var time = cardCopy.querySelector('.popup__text--time');
+  var featuresList = cardCopy.querySelector('.popup__features');
+  var description = cardCopy.querySelector('.popup__description');
+  var photos = cardCopy.querySelector('.popup__photos');
+  var avatar = cardCopy.querySelector('.popup__avatar');
+
+  title.textContent = offerObject.offer.title;
+  address.textContent = offerObject.offer.address;
+  price.textContent = offerObject.offer.price + '₽/ночь';
+  type.textContent = offerObject.offer.type;
+  capacity.textContent = offerObject.offer.rooms + ' комнаты для ' + offerObject.offer.guests + ' гостей';
+  time.textContent = 'Заезд после ' + offerObject.offer.checkin + ', выезд до ' + offerObject.offer.checkout;
+  description.textContent = offerObject.offer.description;
+  avatar.src = offerObject.author.avatar;
+
+  featuresListElement(offerObject.offer.features, featuresList);
+  photosCopy(offerObject.offer.photos, photos);
+
+  return cardCopy;
+};
+
+var firstElementCard = createCard(createdOffers[0]);
+var mapFiltersContainer = map.querySelector('.map__filters-container');
+map.insertBefore(firstElementCard, mapFiltersContainer);
