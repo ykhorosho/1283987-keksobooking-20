@@ -13,7 +13,7 @@ var offersPhotos = [
 ];
 var offersTitles = ['Предложение отличное', 'Плохое предложение'];
 var offersAddress = ['600, 350', '500, 250', '400, 150'];
-var offersPrice = [0, 1000, 5000, 10000]; //10, 300, 1000];
+var offersPrice = [10, 300, 1000]; //[0, 1000, 5000, 10000]
 var offersRooms = [1, 2, 3, 4, 5];
 var offersGuests = [1, 2, 3, 4, 5];
 var offersFeatures = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
@@ -278,7 +278,7 @@ var priceOfType = {
 //min и max зн-е price
 
 // Валидация для цены
-var price = cardCopy.querySelector('.popup__text--price');
+var price = adForm.querySelector('input[name=price]';
 
 price.addEventListener('invalid', function (evt) {
   var priceOfType = evt.target.value.length;
@@ -292,6 +292,9 @@ price.addEventListener('invalid', function (evt) {
     price.setCustomValidity('');
   };
 
+
+// Выбор кол-ва комнат и гостей
+var roomsAndCapacity = function () {
 
 // Отправка формы
 var adForm = document.querySelector('.ad-form__submit');
