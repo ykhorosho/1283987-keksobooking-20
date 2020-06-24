@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable func-call-spacing */
-/* eslint-disable no-undef */
 'use strict';
 
 var OFFERS_COUNT = 8;
@@ -171,9 +168,6 @@ var mapFilters = mapFiltersContainer.querySelectorAll('.map__filter');
 var mapPinMain = mapPinsBlock.querySelector('.map__pin--main');
 
 // Блокирует форму
-// var setDisabled = document.querySelector('fieldset');
-// setDisabled.setAttribute('disabled', 'disabled');
-
 var setDisabled = function (arr) {
   for (var i = 0; i < arr.length; i++) {
     arr[i].setAttribute('disabled', 'disabled');
@@ -227,8 +221,8 @@ function setCoordinates(isPageActive) {
 setCoordinates(false);
 
 
-var MIN_NAME_LENGTH = 3;
-var MAX_NAME_LENGTH = 10;
+var MIN_NAME_LENGTH = 30;
+var MAX_NAME_LENGTH = 100;
 
 var adFormTitle = adForm.querySelector('#title');
 adFormTitle.setAttribute('required', 'required');
@@ -325,6 +319,3 @@ adFormCapacity.addEventListener('change', function (evt) {
   typeOfCapacity(evt.target);
 
 });
-
-// // Отправка формы
-// adForm.action = 'https://javascript.pages.academy/code-and-magick';
