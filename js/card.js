@@ -5,6 +5,9 @@
 
   var featuresListElement = function (featuresArray, featuresList) {
     var elements = featuresList.querySelectorAll('li');
+    for (var k = 0; k < elements.length; k++) {
+      elements[k].textContent = '';
+    }
     for (var i = 0; i < featuresArray.length; i++) {
       elements[i].textContent = featuresArray[i];
 
@@ -13,6 +16,14 @@
 
   var photosCopy = function (photosArray, photosBlock) {
     var photoElemnet = photosBlock.querySelector('img');
+    var removeChild = true;
+    while (removeChild) {
+      if (photosBlock.firstElementChild !== photosBlock.lastElementChild) {
+        photosBlock.removeChild(photosBlock.lastElementChild);
+      } else {
+        removeChild = false;
+      }
+    }
     if (photosArray.length === 1) {
       photoElemnet.src = photosArray[0];
     } else {
@@ -26,8 +37,7 @@
     }
   };
 
-  var createCard = function (offerObject) {
-    var cardCopy = mapCard.content.cloneNode(true);
+  var fillCard = function (offerObject, cardCopy) {
 
     var title = cardCopy.querySelector('.popup__title');
     var address = cardCopy.querySelector('.popup__text--address');
@@ -51,10 +61,57 @@
 
     featuresListElement(offerObject.offer.features, featuresList);
     photosCopy(offerObject.offer.photos, photos);
-
-    return cardCopy;
   };
 
-  var firstElementCard = createCard(window.createdOffers[0]);
-  window.elements.map.insertBefore(firstElementCard, window.elements.mapFiltersContainer);
+  var createCard = function (id) {
+    var cardCopy = mapCard.content.cloneNode(true);
+    fillCard(window.createdOffers[id], cardCopy);
+    window.elements.map.insertBefore(cardCopy, window.elements.mapFiltersContainer);
+  };
+
+  window.elements.mapPinsBlock.addEventListener('click', function (evt) {
+    if (evt.target.classList.contains('map__pin') && !evt.target.classList.contains('map__pin--main')) {
+      cardCheck(evt.target.dataset.id);
+    } else if (evt.target.parentElement.classList.contains('map__pin') && !evt.target.parentElement.classList.contains('map__pin--main')) {
+      cardCheck(evt.target.parentElement.dataset.id);
+    }
+  });
+
+  window.elements.mapPinsBlock.addEventListener('keydown', function (evt) {
+    if (evt.key === 'Enter') {
+      if (evt.target.classList.contains('map__pin') && !evt.target.classList.contains('map__pin--main')) {
+        cardCheck(evt.target.dataset.id);
+      } else if (evt.target.parentElement.classList.contains('map__pin') && !evt.target.parentElement.classList.contains('map__pin--main')) {
+        cardCheck(evt.target.parentElement.dataset.id);
+      }
+    }
+  });
+
+
+  function cardCheck(id) {
+    var cardElement = window.elements.map.querySelector('.map__card');
+    if (cardElement) {
+      fillCard(window.createdOffers[id], cardElement);
+    } else {
+      createCard(id);
+    }
+    cardListners();
+  }
+
+  // Закрытие карточки
+  var cardListners = function () {
+    var cardElement = window.elements.map.querySelector('.map__card');
+    var cardIcon = cardElement.querySelector('.popup__close');
+    cardElement.tabIndex = 0;
+    cardElement.addEventListener('keydown', function (evt) {
+      if (evt.key === 'Escape') {
+        cardElement.remove();
+      }
+    });
+    cardIcon.addEventListener('click', function () {
+      cardElement.remove();
+    });
+  };
+
 })();
+

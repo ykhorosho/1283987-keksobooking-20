@@ -11,6 +11,7 @@
   };
 
   var inputAddress = window.elements.adForm.querySelector('#address');
+  inputAddress.setAttribute('readonly', 'readonly');
 
   window.utils.setCoordinates = function setCoordinates(isPageActive) {
     var distanceLeft = window.elements.mapPinMain.offsetLeft;

@@ -103,6 +103,23 @@
 
   adFormCapacity.addEventListener('change', function (evt) {
     typeOfCapacity(evt.target);
-
   });
+
+  //  Время заезда и выезда
+  var adFormTime = window.elements.adForm.querySelector('#timein');
+  var adFormTimeOut = window.elements.adForm.querySelector('#timeout');
+  adFormTime.addEventListener('change', function (evt) {
+    adFormTimeOut.value = evt.target.value;
+  });
+
+  adFormTimeOut.addEventListener('change', function (evt) {
+    adFormTime.value = evt.target.value;
+  });
+
+  // Фотография пользователя и Фотография жилья
+  var adFormAvatar = window.elements.adForm.querySelector('#avatar');
+  var adFormPhoto = window.elements.adForm.querySelector('#images');
+  adFormAvatar.setAttribute('accept', 'image/*');
+  adFormPhoto.setAttribute('accept', 'image/*');
+
 })();
