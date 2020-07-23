@@ -39,7 +39,7 @@
 
 
       mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
-      mapPinMain.style.top =  (mapPinMain.offsetTop - shift.y) + 'px';
+      mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
 
       window.utils.setCoordinates(true);
 
@@ -52,7 +52,7 @@
       if (mapPinMain.offsetTop < CoordinatesPin.y.min - mapPinMain.offsetHeight - MAP_PIN_MAIN_ARROW) {
         mapPinMain.style.top = CoordinatesPin.y.min - mapPinMain.offsetHeight - MAP_PIN_MAIN_ARROW + 'px';
       } else if (mapPinMain.offsetTop > CoordinatesPin.y.max - mapPinMain.offsetHeight - MAP_PIN_MAIN_ARROW) {
-        mapPinMain.style.top = CoordinatesPin.y.max - mapPinMain.offsetHeight - MAP_PIN_MAIN_ARROW+ 'px';
+        mapPinMain.style.top = CoordinatesPin.y.max - mapPinMain.offsetHeight - MAP_PIN_MAIN_ARROW + 'px';
       }
     };
 
