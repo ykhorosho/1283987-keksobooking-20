@@ -3,7 +3,7 @@
 (function () {
   // 'location': {
   //   'x': getRandomIntInclusive(0 + window.data.OFFSET_X, mapPinsWidth - window.data.OFFSET_X),
-  //   'y': getRandomIntInclusive(130, 630)
+  //   'y': getRandomIntInclusive(130, 630) pppp
   // }
 
   var CoordinatesPin = {
