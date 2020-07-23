@@ -30,7 +30,7 @@
   function activationPage() {
     window.elements.map.classList.remove('map--faded');
     window.elements.adForm.classList.remove('ad-form--disabled');
-    window.appendOfferElements(window.createOfferElement, window.createdOffers, window.elements.mapPinsBlock, window.elements.mapPin);
+    window.backend.load(window.loadOfferElements, alert);
     setEnabled(mapFilters);
     setEnabled(adFormElements);
     window.elements.mapPinMain.removeEventListener('click', mapPinMainClick);
