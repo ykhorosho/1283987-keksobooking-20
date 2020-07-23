@@ -1,6 +1,8 @@
 // Перемещение метки;
 'use strict';
 (function () {
+  var MAP_PIN_MAIN_ARROW = 16;
+
   var CoordinatesPin = {
     x: {
       min: 0,
@@ -35,25 +37,22 @@
         y: event.clientY
       };
 
+
       mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
       mapPinMain.style.top =  (mapPinMain.offsetTop - shift.y) + 'px';
 
       window.utils.setCoordinates(true);
 
-      if (mapPinMain.offsetLeft - shift.x < CoordinatesPin.x.min) {
-        mapPinMain.style.left = CoordinatesPin.x.min + 'px';
-      } else if (mapPinMain.offsetLeft - shift.x > CoordinatesPin.x.max) {
-        mapPinMain.style.left = CoordinatesPin.x.max + 'px';
-      } else {
-        mapPinMain.style.left = mapPinMain.offsetLeft - shift.x + 'px';
+      if (mapPinMain.offsetLeft < CoordinatesPin.x.min - mapPinMain.offsetWidth / 2) {
+        mapPinMain.style.left = (CoordinatesPin.x.min - mapPinMain.offsetWidth / 2) + 'px';
+      } else if (mapPinMain.offsetLeft > CoordinatesPin.x.max - mapPinMain.offsetWidth / 2) {
+        mapPinMain.style.left = (CoordinatesPin.x.max - mapPinMain.offsetWidth / 2) + 'px';
       }
 
-      if (mapPinMain.offsetTop - shift.y < CoordinatesPin.y.min ) {
-        mapPinMain.style.top = CoordinatesPin.y.min + 'px';
-      } else if (mapPinMain.offsetTop - shift.y > CoordinatesPin.y.max) {
-        mapPinMain.style.top = CoordinatesPin.y.max + 'px';
-      } else {
-        mapPinMain.style.top = mapPinMain.offsetTop - shift.y + 'px';
+      if (mapPinMain.offsetTop < CoordinatesPin.y.min - mapPinMain.offsetHeight - MAP_PIN_MAIN_ARROW) {
+        mapPinMain.style.top = CoordinatesPin.y.min - mapPinMain.offsetHeight - MAP_PIN_MAIN_ARROW + 'px';
+      } else if (mapPinMain.offsetTop > CoordinatesPin.y.max - mapPinMain.offsetHeight - MAP_PIN_MAIN_ARROW) {
+        mapPinMain.style.top = CoordinatesPin.y.max - mapPinMain.offsetHeight - MAP_PIN_MAIN_ARROW+ 'px';
       }
     };
 
