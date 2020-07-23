@@ -35,7 +35,7 @@
         y: event.clientY
       };
 
-      mapPinMain.style.left = (mapPinMain.offsetTop - shift.x) + 'px';
+      mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
       mapPinMain.style.top =  (mapPinMain.offsetTop - shift.y) + 'px';
 
       window.utils.setCoordinates(true);
