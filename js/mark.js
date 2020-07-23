@@ -1,15 +1,11 @@
 // Перемещение метки;
 'use strict';
 (function () {
-  // 'location': {
-  //   'x': getRandomIntInclusive(0 + window.data.OFFSET_X, mapPinsWidth - window.data.OFFSET_X),
-  //   'y': getRandomIntInclusive(130, 630) pppp
-  // }
-
   var CoordinatesPin = {
     x: {
-      min: 0 + window.data.OFFSET_X,
-      max: mapPinsWidth - window.data.OFFSET_X
+      min: 0,
+      max: window.elements.mapPinsBlock.offsetWidth
+      // 1200 - map__pins
     },
     y: {
       min: 130,
@@ -27,13 +23,22 @@
       y: evt.clientY
     };
 
-    var onMouseMove = function (evt) {
-      evt.preventDefault();
-      window.map.defaultAddress(mapPinMain, false);
+    var onMouseMove = function (event) {
+      event.preventDefault();
       var shift = {
-        x: startCoords.x - evt.clientX,
-        y: startCoords.y - evt.clientY
+        x: startCoords.x - event.clientX,
+        y: startCoords.y - event.clientY
       };
+
+      startCoords = {
+        x: event.clientX,
+        y: event.clientY
+      };
+
+      mapPinMain.style.left = (mapPinMain.offsetTop - shift.x) + 'px';
+      mapPinMain.style.top =  (mapPinMain.offsetTop - shift.y) + 'px';
+
+      window.utils.setCoordinates(true);
 
       if (mapPinMain.offsetLeft - shift.x < CoordinatesPin.x.min) {
         mapPinMain.style.left = CoordinatesPin.x.min + 'px';
@@ -43,7 +48,7 @@
         mapPinMain.style.left = mapPinMain.offsetLeft - shift.x + 'px';
       }
 
-      if (mapPinMain.offsetTop - CoordinatesPin.y.min < MIN_Y) {
+      if (mapPinMain.offsetTop - shift.y < CoordinatesPin.y.min ) {
         mapPinMain.style.top = CoordinatesPin.y.min + 'px';
       } else if (mapPinMain.offsetTop - shift.y > CoordinatesPin.y.max) {
         mapPinMain.style.top = CoordinatesPin.y.max + 'px';
@@ -52,8 +57,8 @@
       }
     };
 
-    var onMouseUp = function (evt) {
-      evt.preventDefault();
+    var onMouseUp = function (event) {
+      event.preventDefault();
 
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
@@ -63,6 +68,8 @@
     document.addEventListener('mouseup', onMouseUp);
   });
 })();
+
+
   // mousedown - нажатие кнопки мыши на элементе
 
   // mousemove - срабатывает, когда указатель мыши перемещается внутри элемента
