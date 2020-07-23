@@ -14,7 +14,7 @@
 
   window.loadOfferElements = function (offers) {
     window.appendOfferElements(window.createOfferElement, offers, window.elements.mapPinsBlock, window.elements.mapPin);
-  }
+  };
 
   window.appendOfferElements = function (createOfferElementFunction, offers, mapPinsElement, mapPinElement) {
 

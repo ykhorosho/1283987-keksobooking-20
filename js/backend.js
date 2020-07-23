@@ -5,11 +5,11 @@
     GET: 'https://javascript.pages.academy/keksobooking/data'
   };
 
-	var StatusCode = {
+  var StatusCode = {
     OK: 200
   };
 
-	var messageOfError = {
+  var messageOfError = {
     400: 'Неверный запрос',
     401: 'Пользователь не авторизирован',
     403: 'Доступ запрещен',
@@ -17,19 +17,19 @@
     500: 'Внутренняя ошибка сервера'
   };
 
-	var TIMEOUT_IN_MS = 10000;
+  var TIMEOUT_IN_MS = 10000;
 
-	var xhrCreate = function (onLoad, onError) {
+  var xhrCreate = function (onLoad, onError) {
     var xhr = new XMLHttpRequest();
-	  xhr.responseType = 'json';
+    xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-    if (xhr.status === StatusCode.OK) {
-      window.createdOffers = xhr.response;
-      onLoad(xhr.response);
-    } else {
-      onError('Статус ответа: ' + messageOfError[xhr.status]);
-    }
+      if (xhr.status === StatusCode.OK) {
+        window.createdOffers = xhr.response;
+        onLoad(xhr.response);
+      } else {
+        onError('Статус ответа: ' + messageOfError[xhr.status]);
+      }
     });
     xhr.addEventListener('error', function () {
       onError('Произошла ошибка соединения');
@@ -43,8 +43,8 @@
     return xhr;
   };
 
-	var load = function (onload, error) {
-	  var xhr = xhrCreate(onload, error);
+  var load = function (onload, error) {
+    var xhr = xhrCreate(onload, error);
 
     xhr.open('GET', URL.GET);
     xhr.send();
