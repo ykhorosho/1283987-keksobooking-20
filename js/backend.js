@@ -1,8 +1,12 @@
 //
 'use strict';
 (function () {
-  var URL = {
-    GET: 'https://javascript.pages.academy/keksobooking/data'
+  var TIMEOUT_IN_MS = 10000;
+  var RESPONSE_TYPE = 'json';
+
+  var Url = {
+    GET: 'https://javascript.pages.academy/keksobooking/data',
+    SEND: 'https://javascript.pages.academy/keksobooking',
   };
 
   var StatusCode = {
@@ -17,11 +21,9 @@
     500: 'Внутренняя ошибка сервера'
   };
 
-  var TIMEOUT_IN_MS = 10000;
-
   var xhrCreate = function (onLoad, onError) {
     var xhr = new XMLHttpRequest();
-    xhr.responseType = 'json';
+    xhr.responseType = RESPONSE_TYPE;
 
     xhr.addEventListener('load', function () {
       if (xhr.status === StatusCode.OK) {
@@ -46,11 +48,27 @@
   var load = function (onload, error) {
     var xhr = xhrCreate(onload, error);
 
-    xhr.open('GET', URL.GET);
+    xhr.open('GET', Url.GET);
     xhr.send();
   };
 
+  function send(data, onSuccess, onError) {
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = RESPONSE_TYPE;
+
+    xhr.addEventListener('load', function () {
+      if (xhr.status === StatusCode.OK) {
+        onSuccess(xhr.response);
+      } else {
+        onError();
+      }
+    });
+    xhr.open('POST', Url.SEND);
+    xhr.send(data);
+  }
+
   window.backend = {
     load: load,
+    send: send,
   };
 })();

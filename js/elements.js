@@ -8,5 +8,6 @@
     mapFiltersContainer: document.querySelector('.map__filters-container'),
     adForm: document.querySelector('.ad-form'),
     mapPinMain: document.querySelector('.map__pin--main'),
+    adFormReset: document.querySelector('.ad-form__reset'),
   };
 })();

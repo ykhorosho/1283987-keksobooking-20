@@ -103,14 +103,24 @@
     var cardElement = window.elements.map.querySelector('.map__card');
     var cardIcon = cardElement.querySelector('.popup__close');
     cardElement.tabIndex = 0;
-    cardElement.addEventListener('keydown', function (evt) {
+    document.addEventListener('keydown', function (evt) {
       if (evt.key === 'Escape') {
-        cardElement.remove();
+        cardRemove();
       }
     });
     cardIcon.addEventListener('click', function () {
-      cardElement.remove();
+      cardRemove();
     });
   };
 
+  function cardRemove() {
+    var cardElement = window.elements.map.querySelector('.map__card');
+    if (cardElement) {
+      cardElement.remove();
+    }
+  }
+
+  window.card = {
+    remove: cardRemove,
+  };
 })();
