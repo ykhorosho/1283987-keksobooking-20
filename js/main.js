@@ -9,20 +9,20 @@
     for (var i = 0; i < arr.length; i++) {
       arr[i].setAttribute('disabled', 'disabled');
     }
-  };
+  }
 
   function disableForm() {
     setDisabled(mapFilters);
     setDisabled(adFormElements);
     window.elements.mapPinMain.addEventListener('click', mapPinMainClick); // фун-я обратного вызова (коллбэк)
-  };
+  }
 
   // Активное состояние страницы
   function setEnabled(arr) {
     for (var i = 0; i < arr.length; i++) {
       arr[i].removeAttribute('disabled');
     }
-  };
+  }
 
   function mapPinMainClick(evt) {
     if (evt.button === 0 || evt.key === 'Enter') {
@@ -41,11 +41,11 @@
     window.utils.setCoordinates(true);
   }
 
-  function disableSite(){
+  function disableSite() {
     window.elements.map.classList.add('map--faded');
     window.elements.adForm.classList.add('ad-form--disabled');
     disableForm();
-  };
+  }
 
   disableForm();
 

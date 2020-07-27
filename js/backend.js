@@ -45,14 +45,14 @@
     return xhr;
   };
 
-  var load = function (onload, error) {
+  var load = function(onload, error) {
     var xhr = xhrCreate(onload, error);
 
     xhr.open('GET', Url.GET);
     xhr.send();
   };
 
-  function send (data, onSuccess, onError) {
+  function send(data, onSuccess, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = RESPONSE_TYPE;
 

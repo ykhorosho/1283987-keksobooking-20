@@ -122,29 +122,29 @@
   adFormAvatar.setAttribute('accept', 'image/*');
   adFormPhoto.setAttribute('accept', 'image/*');
 
- //Удаляет данные
- function deleteData() {
-  window.main.disableSite();
-  window.pin.removePins();
-  window.pin.clearMapPinMain();
-  window.utils.setCoordinates(false);
- }
+  // Удаляет данные
+  function deleteData() {
+    window.main.disableSite();
+    window.pin.removePins();
+    window.pin.clearMapPinMain();
+    window.utils.setCoordinates(false);
+  }
 
- function onResetButtonClick (evt) {
-   evt.preventDefault();
-   window.elements.adForm.reset();
-   deleteData();
-   window.card.remove();
- };
+  function onResetButtonClick(evt) {
+    evt.preventDefault();
+    window.elements.adForm.reset();
+    deleteData();
+    window.card.remove();
+  }
 
- function onFormSubmit (evt) {
-  window.backend.send(new FormData(window.elements.adForm), window.message.success, window.message.error);
-  evt.preventDefault();
-  window.elements.adForm.reset();
-  deleteData();
-  window.card.remove();
- };
+  function onFormSubmit(evt) {
+    window.backend.send(new FormData(window.elements.adForm), window.message.success, window.message.error);
+    evt.preventDefault();
+    window.elements.adForm.reset();
+    deleteData();
+    window.card.remove();
+  }
 
- window.elements.adForm.addEventListener('submit', onFormSubmit);
- window.elements.adFormReset.addEventListener('click', onResetButtonClick);
+  window.elements.adForm.addEventListener('submit', onFormSubmit);
+  window.elements.adFormReset.addEventListener('click', onResetButtonClick);
 })();

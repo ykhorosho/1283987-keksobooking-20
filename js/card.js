@@ -113,13 +113,12 @@
     });
   };
 
-  //
-  function cardRemove(){
+  function cardRemove() {
     var cardElement = window.elements.map.querySelector('.map__card');
     if (cardElement) {
       cardElement.remove();
     }
-  };
+  }
 
   window.card = {
     remove: cardRemove,

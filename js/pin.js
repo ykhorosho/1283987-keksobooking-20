@@ -15,11 +15,11 @@
     mapPinImage.alt = offerObject.offer.title;
     mapPinButton.dataset.id = index;
     return mapPinElement;
-  };
+  }
 
   function loadOfferElements(offers) {
     appendOfferElements(createOfferElement, offers, window.elements.mapPinsBlock, window.elements.mapPin);
-  };
+  }
 
   function appendOfferElements(createOfferElementFunction, offers, mapPinsElement, mapPinElement) {
 
@@ -29,11 +29,11 @@
       fragment.appendChild(currentOffer);
     }
     mapPinsElement.appendChild(fragment);
-  };
+  }
 
-  function removePins(){
+  function removePins() {
     var pins = window.elements.map.querySelectorAll('.map__pin:not(.map__pin--main)');
-    pins.forEach(function(pin) {
+    pins.forEach(function (pin) {
       pin.remove();
     });
   }
@@ -41,7 +41,7 @@
   function clearMapPinMain() {
     window.elements.mapPinMain.style.top = MainPinCenter.top;
     window.elements.mapPinMain.style.left = MainPinCenter.left;
-  };
+  }
 
   window.pin = {
     removePins: removePins,
