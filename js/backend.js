@@ -45,7 +45,7 @@
     return xhr;
   };
 
-  var load = function(onload, error) {
+  var load = function (onload, error) {
     var xhr = xhrCreate(onload, error);
 
     xhr.open('GET', Url.GET);
