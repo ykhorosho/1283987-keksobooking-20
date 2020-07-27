@@ -34,9 +34,9 @@
   };
 
   var onSuccesEscPress = function (evt) {
-    if (evt.key === 'Escape' && document.querySelector('.success') {
+    if (evt.key === 'Escape' && document.querySelector('.success')) {
       onSuccesClick(evt);
-    }else if (evt.key === 'Escape' && document.querySelector('.error')) {
+    } else if (evt.key === 'Escape' && document.querySelector('.error')) {
       onErrorClick();
     }
   };

@@ -5,16 +5,20 @@
   var mapFilters = window.elements.mapFiltersContainer.querySelectorAll('.map__filter');
 
   // Блокирует форму
-  var setDisabled = function (arr) {
+  function setDisabled(arr) {
     for (var i = 0; i < arr.length; i++) {
       arr[i].setAttribute('disabled', 'disabled');
     }
   };
-  setDisabled(mapFilters);
-  setDisabled(adFormElements);
+
+  function disableForm() {
+    setDisabled(mapFilters);
+    setDisabled(adFormElements);
+    window.elements.mapPinMain.addEventListener('click', mapPinMainClick); // фун-я обратного вызова (коллбэк)
+  };
 
   // Активное состояние страницы
-  var setEnabled = function (arr) {
+  function setEnabled(arr) {
     for (var i = 0; i < arr.length; i++) {
       arr[i].removeAttribute('disabled');
     }
@@ -30,12 +34,22 @@
   function activationPage() {
     window.elements.map.classList.remove('map--faded');
     window.elements.adForm.classList.remove('ad-form--disabled');
-    window.backend.load(window.loadOfferElements, alert);
+    window.backend.load(window.pin.loadOfferElements, alert);
     setEnabled(mapFilters);
     setEnabled(adFormElements);
     window.elements.mapPinMain.removeEventListener('click', mapPinMainClick);
     window.utils.setCoordinates(true);
   }
 
-  window.elements.mapPinMain.addEventListener('click', mapPinMainClick); // фун-я обратного вызова (коллбэк)
+  function disableSite(){
+    window.elements.map.classList.add('map--faded');
+    window.elements.adForm.classList.add('ad-form--disabled');
+    disableForm();
+  };
+
+  disableForm();
+
+  window.main = {
+    disableSite: disableSite,
+  };
 })();
