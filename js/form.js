@@ -2,7 +2,6 @@
 'use strict';
 (function () {
   // // 2. Заполнение информации
-
   // /* Валидация для заголовка*/
   window.utils.setCoordinates(false);
 

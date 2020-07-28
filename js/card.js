@@ -65,7 +65,7 @@
 
   var createCard = function (id) {
     var cardCopy = mapCard.content.cloneNode(true);
-    fillCard(window.createdOffers[id], cardCopy);
+    fillCard(window.filteredOffers[id], cardCopy);
     window.elements.map.insertBefore(cardCopy, window.elements.mapFiltersContainer);
   };
 
@@ -91,7 +91,7 @@
   function cardCheck(id) {
     var cardElement = window.elements.map.querySelector('.map__card');
     if (cardElement) {
-      fillCard(window.createdOffers[id], cardElement);
+      fillCard(window.filteredOffers[id], cardElement);
     } else {
       createCard(id);
     }
