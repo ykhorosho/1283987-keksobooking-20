@@ -3,18 +3,17 @@
 (function () {
   var mapCard = document.querySelector('#card');
 
-  var featuresListElement = function (featuresArray, featuresList) {
+  function featuresListElement(featuresArray, featuresList) {
     var elements = featuresList.querySelectorAll('li');
     for (var k = 0; k < elements.length; k++) {
       elements[k].textContent = '';
     }
     for (var i = 0; i < featuresArray.length; i++) {
       elements[i].textContent = featuresArray[i];
-
     }
-  };
+  }
 
-  var photosCopy = function (photosArray, photosBlock) {
+  function photosCopy(photosArray, photosBlock) {
     var photoElemnet = photosBlock.querySelector('img');
     var removeChild = true;
     while (removeChild) {
@@ -35,9 +34,9 @@
       }
       photoElemnet.src = photosArray[photosArray.length - 1];
     }
-  };
+  }
 
-  var fillCard = function (offerObject, cardCopy) {
+  function fillCard(offerObject, cardCopy) {
 
     var title = cardCopy.querySelector('.popup__title');
     var address = cardCopy.querySelector('.popup__text--address');
@@ -61,7 +60,7 @@
 
     featuresListElement(offerObject.offer.features, featuresList);
     photosCopy(offerObject.offer.photos, photos);
-  };
+  }
 
   var createCard = function (id) {
     var cardCopy = mapCard.content.cloneNode(true);
@@ -78,7 +77,7 @@
   });
 
   window.elements.mapPinsBlock.addEventListener('keydown', function (evt) {
-    if (evt.key === 'Enter') {
+    if (evt.key === window.data.ENTER_KEY) {
       if (evt.target.classList.contains('map__pin') && !evt.target.classList.contains('map__pin--main')) {
         cardCheck(evt.target.dataset.id, evt.target);
       } else if (evt.target.parentElement.classList.contains('map__pin') && !evt.target.parentElement.classList.contains('map__pin--main')) {
@@ -104,19 +103,19 @@
   }
 
   // Закрытие карточки
-  var cardListners = function () {
+  function cardListners() {
     var cardElement = window.elements.map.querySelector('.map__card');
     var cardIcon = cardElement.querySelector('.popup__close');
     cardElement.tabIndex = 0;
     document.addEventListener('keydown', function (evt) {
-      if (evt.key === 'Escape') {
+      if (evt.key === window.data.ESC_KEY) {
         cardRemove();
       }
     });
     cardIcon.addEventListener('click', function () {
       cardRemove();
     });
-  };
+  }
 
   function cardRemove() {
     var cardElement = window.elements.map.querySelector('.map__card');

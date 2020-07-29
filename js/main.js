@@ -25,7 +25,7 @@
   }
 
   function mapPinMainClick(evt) {
-    if (evt.button === 0 || evt.key === 'Enter') {
+    if (evt.button === 0 || evt.key === window.data.ENTER_KEY) {
       evt.preventDefault();
       activationPage();
     }

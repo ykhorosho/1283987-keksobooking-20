@@ -1,7 +1,7 @@
 // Перемещение метки;
 'use strict';
 (function () {
-  var MAP_PIN_MAIN_ARROW = 16;
+  var MAP_PIN_MAIN_ARROW = window.data.MAIN_ARROW_HEIGHT;
 
   var CoordinatesPin = {
     x: {
@@ -25,7 +25,7 @@
       y: evt.clientY
     };
 
-    var onMouseMove = function (event) {
+    function onMouseMove(event) {
       event.preventDefault();
       var shift = {
         x: startCoords.x - event.clientX,
@@ -54,14 +54,13 @@
       } else if (mapPinMain.offsetTop > CoordinatesPin.y.max - mapPinMain.offsetHeight - MAP_PIN_MAIN_ARROW) {
         mapPinMain.style.top = CoordinatesPin.y.max - mapPinMain.offsetHeight - MAP_PIN_MAIN_ARROW + 'px';
       }
-    };
+    }
 
-    var onMouseUp = function (event) {
+    function onMouseUp(event) {
       event.preventDefault();
-
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
-    };
+    }
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
