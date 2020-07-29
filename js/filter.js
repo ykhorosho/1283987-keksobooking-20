@@ -11,6 +11,8 @@
   var housingRooms = mapFilters.querySelector('#housing-rooms');
   var housingGuests = mapFilters.querySelector('#housing-guests');
 
+  var debounce = window.debounce(window.pin.loadOfferElements);
+
   function checkType(pin) {
     return housingType.value === 'any' ? true : pin.offer.type === housingType.value;
   }
@@ -55,7 +57,7 @@
     window.pin.removePins();
     window.card.remove();
     var pins = window.createdOffers;
-    window.pin.loadOfferElements(getFilterData(pins));
+    debounce(getFilterData(pins));
   }
 
   mapFilters.addEventListener('change', onFilterChange);

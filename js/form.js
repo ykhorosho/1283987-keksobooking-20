@@ -39,7 +39,7 @@
   var adFormPrice = window.elements.adForm.querySelector('#price');
   adFormPrice.setAttribute('required', 'required');
   adFormPrice.placeholder = priceOfType[typeOfHouse];
-  var priceValidation = function (target) {
+  function priceValidation(target) {
     var value = target.value;
     if (target.validity.valueMissing) {
       target.setCustomValidity('Обязательное поле');
@@ -51,7 +51,8 @@
       target.setCustomValidity('');
     }
     target.reportValidity();
-  };
+  }
+
   adFormPrice.addEventListener('input', function (evt) {
     priceValidation(evt.target);
   });
@@ -80,7 +81,7 @@
     '100': 'Только не для гостей'
   };
 
-  var typeOfCapacity = function (target) {
+  function typeOfCapacity(target) {
     var value = target.value;
     var isValid = guestCapacity[typeOfRoom].some(function (element) {
       return element === value;
@@ -91,7 +92,7 @@
       target.setCustomValidity('');
     }
     target.reportValidity();
-  };
+  }
 
   var adFormRoom = window.elements.adForm.querySelector('#room_number');
   var adFormCapacity = window.elements.adForm.querySelector('#capacity');
