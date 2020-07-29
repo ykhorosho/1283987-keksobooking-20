@@ -34,7 +34,7 @@
         return price > MAX_PRICE;
       default:
         return true;
-    };
+    }
   }
 
   function checkFeatures(pin) {
@@ -62,5 +62,5 @@
 
   window.filter = {
     getData: getFilterData
-  }
+  };
 })();
