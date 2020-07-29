@@ -134,6 +134,7 @@
     evt.preventDefault();
     window.elements.adForm.reset();
     deleteData();
+    window.avatar.resetPreview();
     window.card.remove();
   }
 
@@ -142,6 +143,7 @@
     evt.preventDefault();
     window.elements.adForm.reset();
     deleteData();
+    window.avatar.resetPreview();
     window.card.remove();
   }
 
