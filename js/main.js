@@ -34,7 +34,7 @@
   function activationPage() {
     window.elements.map.classList.remove('map--faded');
     window.elements.adForm.classList.remove('ad-form--disabled');
-    window.backend.load(window.pin.loadOfferElements, alert);
+    window.backend.load(createOffersElements, alert);
     setEnabled(mapFilters);
     setEnabled(adFormElements);
     window.elements.mapPinMain.removeEventListener('click', mapPinMainClick);
@@ -45,6 +45,10 @@
     window.elements.map.classList.add('map--faded');
     window.elements.adForm.classList.add('ad-form--disabled');
     disableForm();
+  }
+
+  function createOffersElements(pins) {
+    window.pin.loadOfferElements(window.filter.getData(pins));
   }
 
   disableForm();
