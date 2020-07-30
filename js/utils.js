@@ -20,8 +20,29 @@
     return sortPins;
   }
 
+  function checkContent(element, value, text) {
+    if (!value) {
+      element.remove();
+    } else {
+      element.textContent = text;
+    }
+  }
+
+  function checkMultiContent(element, valueArray, text) {
+    var checkValueArray = valueArray.every(function (value) {
+      return !!value;
+    });
+    if (!checkValueArray) {
+      element.remove();
+    } else {
+      element.textContent = text;
+    }
+  }
+
   window.utils = {
     setCoordinates: setCoordinates,
     getAmountOfPins: getAmountOfPins,
+    checkContent: checkContent,
+    checkMultiContent: checkMultiContent,
   };
 })();

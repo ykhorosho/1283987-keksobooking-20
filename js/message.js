@@ -8,36 +8,36 @@
     var errorElement = errorMessage.cloneNode(true);
     var errorButton = errorElement.querySelector('.error__button');
 
-    errorButton.addEventListener('click', onErrorRemove);
-    document.addEventListener('keydown', onEscPress);
+    errorButton.addEventListener('click', onErrorButtonClick);
+    document.addEventListener('keydown', onDocumentEscPress);
 
     main.appendChild(errorElement);
   }
 
-  function onErrorRemove() {
+  function onErrorButtonClick() {
     var mainSuccessMessage = main.querySelector('.error');
     mainSuccessMessage.remove();
-    document.removeEventListener('keydown', onEscPress);
+    document.removeEventListener('keydown', onDocumentEscPress);
   }
 
   function renderSuccess() {
     var successElement = successMessage.cloneNode(true);
-    successElement.addEventListener('click', onSuccesRemove);
-    document.addEventListener('keydown', onEscPress);
+    successElement.addEventListener('click', onSuccesElementClick);
+    document.addEventListener('keydown', onDocumentEscPress);
     main.appendChild(successElement);
   }
 
-  function onSuccesRemove() {
+  function onSuccesElementClick() {
     var mainSuccessMessage = main.querySelector('.success');
     mainSuccessMessage.remove();
-    document.removeEventListener('keydown', onEscPress);
+    document.removeEventListener('keydown', onDocumentEscPress);
   }
 
-  function onEscPress(evt) {
+  function onDocumentEscPress(evt) {
     if (evt.key === window.data.ESC_KEY && document.querySelector('.success')) {
-      onSuccesRemove();
+      onSuccesElementClick();
     } else if (evt.key === window.data.ESC_KEY && document.querySelector('.error')) {
-      onErrorRemove();
+      onErrorButtonClick();
     }
   }
 

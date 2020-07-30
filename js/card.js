@@ -4,25 +4,31 @@
   var mapCard = document.querySelector('#card');
 
   function featuresListElement(featuresArray, featuresList) {
-    var elements = featuresList.querySelectorAll('li');
-    for (var k = 0; k < elements.length; k++) {
-      elements[k].textContent = '';
+    if (featuresArray.length === 0) {
+      featuresList.remove();
+      return;
     }
-    for (var i = 0; i < featuresArray.length; i++) {
-      elements[i].textContent = featuresArray[i];
+    for (var i = 0; i < featuresList.children.length; i++) {
+      var hasFeature = false;
+      for (var k = 0; k < featuresArray.length; k++) {
+        if (featuresList.children[i].classList.contains('popup__feature--' + featuresArray[k])) {
+          hasFeature = true;
+          break;
+        }
+      }
+      if (!hasFeature) {
+        featuresList.children[i].remove();
+        i--;
+      }
     }
   }
 
   function photosCopy(photosArray, photosBlock) {
-    var photoElemnet = photosBlock.querySelector('img');
-    var removeChild = true;
-    while (removeChild) {
-      if (photosBlock.firstElementChild !== photosBlock.lastElementChild) {
-        photosBlock.removeChild(photosBlock.lastElementChild);
-      } else {
-        removeChild = false;
-      }
+    if (photosArray.length === 0) {
+      photosBlock.remove();
+      return;
     }
+    var photoElemnet = photosBlock.querySelector('img');
     if (photosArray.length === 1) {
       photoElemnet.src = photosArray[0];
     } else {
@@ -49,24 +55,28 @@
     var photos = cardCopy.querySelector('.popup__photos');
     var avatar = cardCopy.querySelector('.popup__avatar');
 
-    title.textContent = offerObject.offer.title;
-    address.textContent = offerObject.offer.address;
-    price.textContent = offerObject.offer.price + '₽/ночь';
-    type.textContent = offerObject.offer.type;
-    capacity.textContent = offerObject.offer.rooms + ' комнаты для ' + offerObject.offer.guests + ' гостей';
-    time.textContent = 'Заезд после ' + offerObject.offer.checkin + ', выезд до ' + offerObject.offer.checkout;
-    description.textContent = offerObject.offer.description;
-    avatar.src = offerObject.author.avatar;
+    window.utils.checkContent(title, offerObject.offer.title, offerObject.offer.title);
+    window.utils.checkContent(address, offerObject.offer.address, offerObject.offer.address);
+    window.utils.checkContent(price, offerObject.offer.price, offerObject.offer.price + '₽/ночь');
+    window.utils.checkContent(type, offerObject.offer.type, offerObject.offer.type);
+    window.utils.checkMultiContent(capacity, [offerObject.offer.rooms, offerObject.offer.guests], offerObject.offer.rooms + ' комнаты для ' + offerObject.offer.guests + ' гостей');
+    window.utils.checkMultiContent(time, [offerObject.offer.checkin, offerObject.offer.checkout], 'Заезд после ' + offerObject.offer.checkin + ', выезд до ' + offerObject.offer.checkout);
+    window.utils.checkContent(description, offerObject.offer.description, offerObject.offer.description);
 
     featuresListElement(offerObject.offer.features, featuresList);
     photosCopy(offerObject.offer.photos, photos);
+    if (offerObject.author.avatar) {
+      avatar.src = offerObject.author.avatar;
+    } else {
+      avatar.remove();
+    }
   }
 
-  var createCard = function (id) {
+  function createCard(id) {
     var cardCopy = mapCard.content.cloneNode(true);
     fillCard(window.filteredOffers[id], cardCopy);
     window.elements.map.insertBefore(cardCopy, window.elements.mapFiltersContainer);
-  };
+  }
 
   window.elements.mapPinsBlock.addEventListener('click', function (evt) {
     if (evt.target.classList.contains('map__pin') && !evt.target.classList.contains('map__pin--main')) {
@@ -91,10 +101,9 @@
     var cardElement = window.elements.map.querySelector('.map__card');
     var activePin = window.elements.map.querySelector('.map__pin--active');
     if (cardElement) {
-      fillCard(window.filteredOffers[id], cardElement);
-    } else {
-      createCard(id);
+      cardElement.remove();
     }
+    createCard(id);
     if (activePin) {
       activePin.classList.remove('map__pin--active');
     }
