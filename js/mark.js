@@ -25,7 +25,7 @@
       y: evt.clientY
     };
 
-    function onMouseMove(event) {
+    function onMapPinMainMouseMove(event) {
       event.preventDefault();
       var shift = {
         x: startCoords.x - event.clientX,
@@ -56,13 +56,13 @@
       }
     }
 
-    function onMouseUp(event) {
+    function onMapPinMainMouseUp(event) {
       event.preventDefault();
-      document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseup', onMouseUp);
+      document.removeEventListener('mousemove', onMapPinMainMouseMove);
+      document.removeEventListener('mouseup', onMapPinMainMouseUp);
     }
 
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
+    document.addEventListener('mousemove', onMapPinMainMouseMove);
+    document.addEventListener('mouseup', onMapPinMainMouseUp);
   });
 })();

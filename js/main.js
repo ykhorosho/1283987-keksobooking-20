@@ -6,25 +6,25 @@
 
   // Блокирует форму
   function setDisabled(arr) {
-    for (var i = 0; i < arr.length; i++) {
-      arr[i].setAttribute('disabled', 'disabled');
-    }
+    arr.forEach(function (element) {
+      element.setAttribute('disabled', 'disabled');
+    });
   }
 
   function disableForm() {
     setDisabled(mapFilters);
     setDisabled(adFormElements);
-    window.elements.mapPinMain.addEventListener('click', mapPinMainClick); // фун-я обратного вызова (коллбэк)
+    window.elements.mapPinMain.addEventListener('click', onMapPinMainClick); // фун-я обратного вызова (коллбэк)
   }
 
   // Активное состояние страницы
   function setEnabled(arr) {
-    for (var i = 0; i < arr.length; i++) {
-      arr[i].removeAttribute('disabled');
-    }
+    arr.forEach(function (element) {
+      element.removeAttribute('disabled');
+    });
   }
 
-  function mapPinMainClick(evt) {
+  function onMapPinMainClick(evt) {
     if (evt.button === 0 || evt.key === window.data.ENTER_KEY) {
       evt.preventDefault();
       activationPage();
@@ -37,7 +37,7 @@
     window.backend.load(createOffersElements, alert);
     setEnabled(mapFilters);
     setEnabled(adFormElements);
-    window.elements.mapPinMain.removeEventListener('click', mapPinMainClick);
+    window.elements.mapPinMain.removeEventListener('click', onMapPinMainClick);
     window.utils.setCoordinates(true);
   }
 

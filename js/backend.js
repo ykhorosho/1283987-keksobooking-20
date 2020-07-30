@@ -21,7 +21,7 @@
     500: 'Внутренняя ошибка сервера'
   };
 
-  var xhrCreate = function (onLoad, onError) {
+  function xhrCreate(onLoad, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = RESPONSE_TYPE;
 
@@ -43,14 +43,14 @@
     xhr.timeout = TIMEOUT_IN_MS;
 
     return xhr;
-  };
+  }
 
-  var load = function (onload, error) {
+  function load(onload, error) {
     var xhr = xhrCreate(onload, error);
 
     xhr.open('GET', Url.GET);
     xhr.send();
-  };
+  }
 
   function send(data, onSuccess, onError) {
     var xhr = new XMLHttpRequest();
